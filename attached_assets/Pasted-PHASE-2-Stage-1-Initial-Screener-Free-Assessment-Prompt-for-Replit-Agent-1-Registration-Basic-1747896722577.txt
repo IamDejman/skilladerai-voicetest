@@ -1,0 +1,80 @@
+PHASE 2: Stage 1 Initial Screener (Free Assessment)
+Prompt for Replit Agent:
+1. Registration & Basic Info Collection (/quiz)
+Create a registration flow with:
+Step 1: Candidate Registration
+javascript// Registration form structure
+const registrationFields = {
+  personalInfo: {
+    fullName: "string",
+    email: "string", 
+    phone: "string",
+    location: "string"
+  },
+  experience: {
+    customerServiceYears: "number",
+    previousCallCenter: "boolean",
+    englishProficiency: "self-assessment" // Basic/Intermediate/Advanced
+  }
+};
+Step 2: Assessment Type Selection
+
+Display two-stage assessment model explanation
+"Start Free Screener (10 mins)" primary CTA
+Information about Stage 2 requirements
+Progress indicator showing current step
+
+2. Stage 1 Assessment Components (~10 minutes)
+Typing Speed Test (3 minutes)
+javascriptconst typingTest = {
+  duration: 180, // 3 minutes
+  text: "Customer service representative sample text...",
+  metrics: ["wpm", "accuracy", "consistency"]
+};
+Reading Comprehension (4 minutes)
+
+2-3 short customer service scenarios
+Multiple choice questions about context, tone, resolution
+Auto-scoring based on correct answers
+
+Grammar & Writing Assessment (3 minutes)
+
+Fill-in-the-blank sentences
+Grammar correction exercises
+Short response to customer inquiry (50 words)
+
+3. API Endpoints for Stage 1
+javascript// POST /api/register-candidate
+// Body: { personalInfo, experience }
+// Response: { candidateId, assessmentToken }
+
+// POST /api/stage1/typing-test
+// Body: { candidateId, typedText, timeElapsed, keystrokes }
+// Response: { wpm, accuracy, passed }
+
+// POST /api/stage1/reading-comprehension
+// Body: { candidateId, answers }
+// Response: { score, correctAnswers, passed }
+
+// POST /api/stage1/grammar-assessment
+// Body: { candidateId, grammarAnswers, writingResponse }
+// Response: { grammarScore, writingScore, overallPassed }
+
+// GET /api/stage1/results/:candidateId
+// Response: { stage1Results, qualifiesForStage2, feedback }
+4. Stage 1 Scoring Logic
+
+Typing: Minimum 35 WPM with 85% accuracy
+Reading: 70% correct answers required
+Grammar: Combined score of 75% to pass
+Overall: Must pass all three components to advance
+
+5. UI Components for Stage 1
+
+TypingTestInterface with real-time WPM display
+ReadingComprehensionCard with scenario text
+GrammarQuestionForm with validation
+Stage1ProgressTracker component
+ResultsSummary showing pass/fail status
+
+Deliverable: Complete Stage 1 screener with auto-scoring and qualification logic.

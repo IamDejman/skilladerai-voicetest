@@ -1,0 +1,159 @@
+Modify the existing assessment application to implement strict full-screen security measures and enhanced user flow controls.
+
+Required Modifications
+
+1. Full-Screen Implementation for Stage 1 Typing Test
+
+Full-Screen Entry (Stage 1 - Typing Test)
+
+When user clicks "Begin Typing Test":
+
+Display a modal/alert warning: "You are about to enter full-screen mode for the assessment. Do you want to continue?"
+
+Provide "Continue" and "Cancel" options
+
+If "Continue": Enter full-screen mode and hide nav bar + footer
+
+If "Cancel": Return to previous screen
+
+2. Exit Protection System
+
+Exit Attempt Detection: Monitor for any full-screen exit attempts during ANY stage of the test
+
+Exit Confirmation Dialog: When user tries to exit full-screen:
+
+Display warning: "Exiting full-screen will immediately submit your test and end the assessment. You will not be able to continue or retake any part of the test. Are you sure you want to exit?"
+
+Provide "Stay in Test" and "Exit and Submit" options
+
+Exit Consequences: If user confirms exit:
+
+Immediately submit all completed portions of the test
+
+Lock access to ALL stages (Stage 1 AND Stage 2)
+
+Display confirmation message: "Your test has been submitted. You cannot continue the assessment."
+
+Prevent any further access to test components
+
+Implementation Steps
+
+Step 1: Add Full-Screen Entry Logic
+
+Step 2: Modify Navigation Display
+
+Standard navigation bar and footer for non-test pages
+
+Clean, professional interface design
+
+Responsive design for different screen sizes
+
+Step 3: Implement Exit Detection and Lockout
+
+Use HTML5 Fullscreen API
+
+Implement proper event listeners for fullscreen changes
+
+Handle browser-specific fullscreen behaviors
+
+Account for ESC key, F11, and browser button exits
+
+State Management
+
+Track test progress and completion status
+
+Persist user's exit status to prevent re-entry
+
+Manage stage transitions and access permissions
+
+Security Features
+
+Prevent multiple test attempts after exit
+
+Disable right-click context menu during assessment
+
+Consider disabling common keyboard shortcuts during test
+
+Log exit attempts for administrative purposes
+
+User Experience Flow
+
+Pre-Assessment
+
+User accesses assessment portal
+
+Instructions and overview displayed
+
+Stage selection available
+
+Stage 1 Flow
+
+User selects "Begin Typing Test"
+
+Full-screen warning modal appears
+
+User confirms → Enter full-screen mode
+
+Complete typing, reading, and grammar tests in sequence
+
+Progress to Stage 2 OR exit with consequences
+
+Stage 2 Flow
+
+Voice recording interface
+
+Maintain full-screen restrictions
+
+Complete assessment OR exit with consequences
+
+Post-Assessment
+
+Successful completion → Results/confirmation page
+
+Early exit → Submission confirmation and lockout
+
+Error Handling
+
+Handle browser compatibility issues with fullscreen API
+
+Provide fallback messaging for unsupported browsers
+
+Graceful degradation for mobile devices
+
+Network connectivity error handling for submissions
+
+Data Management
+
+Store progress locally during assessment
+
+Submit data immediately upon exit or completion
+
+Clear sensitive data after submission
+
+Implement proper data validation
+
+Additional Considerations
+
+Accessibility compliance (WCAG guidelines)
+
+Mobile device compatibility and restrictions
+
+Timer functionality if needed
+
+Progress indicators for user guidance
+
+Clear instructions throughout the process
+
+Testing Requirements
+
+Test full-screen behavior across major browsers
+
+Verify exit protection works consistently
+
+Test stage progression and lockout functionality
+
+Validate data submission and storage
+
+Test accessibility features
+
+Please modify the existing assessment application to implement these critical full-screen security requirements. Focus on adding the full-screen functionality to the typing test entry point and implementing the exit protection system that locks users out of all test stages upon exit.

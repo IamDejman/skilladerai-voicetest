@@ -1,0 +1,83 @@
+Project Overview
+Build a web-based AI-powered speech assessment platform that evaluates spoken English for accent neutrality and CEFR proficiency levels (A1-C2), with AI model fine-tuning capabilities.
+Tech Stack
+
+Frontend: React.js with Tailwind CSS
+Backend: Node.js/Express.js
+Database: PostgreSQL or MongoDB
+AI Integration: OpenAI GPT-4 Turbo API
+Audio Processing: Web Audio API, MediaRecorder
+Deployment: Full-stack on Replit
+
+Design System
+
+Primary Color: #4CAF50 (educational green)
+Secondary Color: #2196F3 (trustworthy blue)
+Neutral: #F5F5F5 (light grey)
+Text: #333333 (dark grey)
+Accent: #FF9800 (feedback orange)
+Fonts: Nunito/Open Sans
+Style: Minimalist, mobile-responsive, Duolingo-inspired
+
+
+PHASE 1: Project Setup & Landing Page
+Prompt for Replit Agent:
+Create a React.js application with the following setup:
+1. Project Structure
+/src
+  /components
+    /ui (reusable components)
+    /layout
+  /pages
+  /hooks
+  /utils
+  /api
+  App.js
+  index.js
+/public
+/server
+  /routes
+  /middleware
+  /models
+  server.js
+2. Dependencies to Install
+json{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "tailwindcss": "^3.2.0",
+    "framer-motion": "^8.0.0",
+    "lucide-react": "^0.263.1",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0"
+  }
+}
+3. Landing Page Requirements
+Create a landing page (/) with:
+
+Hero section with headline: "Master English Speaking with AI-Powered Assessment"
+Subtext: "Get instant feedback on accent neutrality and CEFR proficiency levels"
+Single prominent CTA button "Start Assessment" → navigates to /quiz
+Use the design system colors and Tailwind classes
+Mobile-responsive design
+Clean, educational interface inspired by Duolingo
+
+4. Basic Routing Setup
+Set up React Router with routes for:
+
+/ (Landing)
+/quiz (Assessment & Registration)
+/assessment (Micro-Assessment)
+/results (Results Dashboard)
+
+5. Basic Express Server
+Create a basic Express server with:
+
+CORS enabled
+JSON parsing middleware
+Basic health check endpoint: GET /api/health
+Port configuration for Replit
+
+Deliverable: Working landing page with navigation and basic server setup.

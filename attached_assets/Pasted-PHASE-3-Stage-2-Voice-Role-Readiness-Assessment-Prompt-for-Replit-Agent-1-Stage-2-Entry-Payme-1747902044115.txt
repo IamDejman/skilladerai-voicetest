@@ -1,0 +1,399 @@
+PHASE 3: Stage 2 Voice & Role Readiness Assessment
+Prompt for Replit Agent:
+1. Stage 2 Entry & Payment Gate (/assessment)
+Create the premium assessment interface:
+Entry Requirements Check
+
+Verify candidate passed Stage 1
+Display Stage 2 overview (30 minutes, comprehensive evaluation)
+Payment integration placeholder (for future implementation)
+Assessment consent and terms
+
+Assessment Structure (30 minutes total)
+javascriptconst stage2Structure = {
+  cefrWriting: {
+    duration: 8, // 8 minutes
+    tasks: ["email_response", "complaint_resolution", "formal_writing"]
+  },
+  voiceAssessment: {
+    duration: 12, // 12 minutes  
+    tasks: ["reading_aloud", "scenario_response", "open_conversation"]
+  },
+  situationalJudgment: {
+    duration: 10, // 10 minutes
+    scenarios: 6, // Customer service situations
+    type: "multiple_choice_with_rationale"
+  }
+};
+2. CEFR C1 Writing Assessment (8 minutes)
+Task 1: Email Response (3 minutes)
+
+Present customer complaint scenario
+Candidate writes professional response email
+Target: 100-150 words
+
+Task 2: Complaint Resolution (3 minutes)
+
+Escalated customer issue scenario
+Formal resolution letter format
+Target: 80-120 words
+
+Task 3: Process Documentation (2 minutes)
+
+Write clear instructions for common procedure
+Test clarity and structure
+
+3. Voice Assessment Interface (12 minutes)
+Reading Aloud Task (3 minutes)
+javascriptconst readingTask = {
+  text: "Customer service script with challenging vocabulary",
+  recordingTime: 180,
+  evaluationCriteria: ["pronunciation", "pace", "clarity", "intonation"]
+};
+Scenario Response (6 minutes)
+
+Present 3 customer service scenarios via audio/text
+2 minutes per scenario for recorded response
+Evaluate problem-solving and communication
+
+Open Conversation (3 minutes)
+
+Simulated customer interaction
+Candidate responds to prompts about experience, motivation
+Assess fluency and confidence
+
+4. Situational Judgment Test (10 minutes)
+javascriptconst sjtScenarios = [
+  {
+    scenario: "Angry customer demands immediate refund for policy violation",
+    options: [
+      { action: "Immediately process refund", reasoning: "Customer satisfaction priority" },
+      { action: "Explain policy calmly", reasoning: "Follow company guidelines" },
+      { action: "Escalate to supervisor", reasoning: "Avoid conflict" },
+      { action: "Offer alternative solution", reasoning: "Find middle ground" }
+    ],
+    correctAnswer: 3, // Index of best response
+    rationale: "Explanation of why this approach is optimal"
+  }
+  // 5 more scenarios
+];
+5. API Endpoints for Stage 2
+javascript// POST /api/stage2/start-assessment
+// Body: { candidateId, stage1Token }
+// Response: { stage2Token, assessmentConfig, timeAllocation }
+
+// POST /api/stage2/submit-writing
+// Body: { candidateId, task, response, timeSpent }
+// Response: { taskId, status: "submitted" }
+
+// POST /api/stage2/upload-voice
+// Body: FormData with audio blob, task metadata
+// Response: { audioId, transcription, status: "processing" }
+
+// POST /api/stage2/submit-sjt
+// Body: { candidateId, scenario, selectedOption, rationale }
+// Response: { submissionId, status }
+
+// POST /api/stage2/complete-assessment
+// Body: { candidateId, stage2Token }
+// Response: { submissionId, processingStatus, estimatedResults }
+6. Voice Recording Components
+
+VoiceRecorder with real-time audio visualization
+PlaybackControls for review before submission
+AudioLevelMeter showing input levels
+TimerDisplay for each recording task
+ScenarioPresenter with text and audio prompts
+
+7. Advanced Features
+
+Auto-save functionality every 30 seconds
+Bandwidth optimization for audio uploads
+Fallback text input if microphone fails
+Progress persistence across browser sessions
+
+Deliverable: Complete Stage 2 assessment with voice recording, writing tasks, and situational judgment testing.
+
+PHASE 4: AI-Powered Scoring & Analysis Engine
+Prompt for Replit Agent:
+1. Customer Service Voice Scoring Engine
+Create comprehensive AI-powered evaluation system:
+Voice Analysis Pipeline
+javascriptconst voiceAnalysis = {
+  fluency: (audioData, transcript) => {
+    // Analyze speaking pace, hesitations, flow
+    // Return score 0-100 and specific feedback
+  },
+  articulation: (audioData) => {
+    // Evaluate clarity, pronunciation, enunciation
+    // Flag specific phonetic issues
+  },
+  tone: (audioData, context) => {
+    // Assess professional tone, empathy, confidence
+    // Customer service appropriate delivery
+  },
+  cefrLevel: (transcript, complexity) => {
+    // Determine C1 proficiency level
+    // Grammar accuracy, vocabulary range
+  }
+};
+Writing Assessment Scoring
+javascriptconst writingAnalysis = {
+  grammarAccuracy: (text) => {
+    // Parse grammar errors, sentence structure
+    // Return detailed error analysis
+  },
+  professionalTone: (text, context) => {
+    // Evaluate business communication standards
+    // Politeness, clarity, structure
+  },
+  problemSolving: (response, scenario) => {
+    // Assess solution quality and appropriateness
+    // Customer satisfaction potential
+  },
+  cefrWriting: (text) => {
+    // C1-level writing proficiency assessment
+    // Complexity, accuracy, fluency metrics
+  }
+};
+2. Situational Judgment Scoring
+javascriptconst sjtScoring = {
+  calculateSJTScore: (responses, answerKey) => {
+    // Score based on optimal customer service responses
+    // Weight critical scenarios higher
+  },
+  analyzeDecisionPattern: (responses) => {
+    // Identify customer service approach tendencies
+    // Flag potential red flags or strengths
+  },
+  generateFeedback: (score, responses) => {
+    // Provide specific improvement recommendations
+    // Link to training resources
+  }
+};
+3. OpenAI Integration for Advanced Analysis
+javascriptconst aiAnalysis = async (assessmentData) => {
+  const prompt = `
+    Analyze this customer service candidate assessment:
+    
+    Voice Transcript: ${assessmentData.voiceTranscript}
+    Writing Samples: ${assessmentData.writingSamples}
+    SJT Responses: ${assessmentData.sjtResponses}
+    
+    Evaluate for:
+    1. CEFR C1 English proficiency
+    2. Customer service readiness
+    3. Professional communication skills
+    4. Problem-solving approach
+    5. Cultural sensitivity and empathy
+    
+    Provide scores (0-100) and specific feedback for each area.
+    Format as JSON with detailed recommendations.
+  `;
+  
+  // Call GPT-4 Turbo for comprehensive analysis
+};
+4. Integrated Scoring System
+javascriptconst calculateFinalScore = (stage1Results, stage2Results) => {
+  return {
+    overallScore: number, // 0-100 weighted composite
+    breakdown: {
+      typing: stage1Results.typingScore,
+      grammar: stage1Results.grammarScore + stage2Results.writingScore,
+      reading: stage1Results.readingScore,
+      speaking: {
+        fluency: number,
+        articulation: number,
+        tone: number,
+        confidence: number
+      },
+      customerServiceReadiness: {
+        situationalJudgment: number,
+        empathy: number,
+        problemSolving: number,
+        professionalism: number
+      }
+    },
+    cefrLevel: "C1" | "B2" | "B1", // Based on combined assessment
+    recommendation: "HIRE" | "CONSIDER" | "NOT_READY",
+    careerboxFit: number, // 0-100 specific to Careerbox requirements
+    improvementAreas: string[]
+  };
+};
+5. API Endpoints for Scoring
+javascript// POST /api/scoring/process-assessment
+// Body: { candidateId, stage1Data, stage2Data }
+// Response: { processingId, status: "queued" }
+
+// GET /api/scoring/status/:processingId
+// Response: { status: "processing" | "complete" | "error", progress: number }
+
+// GET /api/scoring/results/:candidateId
+// Response: { scores, feedback, recommendation, detailedAnalysis }
+
+// POST /api/scoring/manual-review
+// Body: { candidateId, reviewerNotes, adjustedScores }
+// Response: { updatedResults, reviewStatus }
+6. Real-time Processing Pipeline
+
+Queue system for AI analysis tasks
+Progress tracking for long-running assessments
+Fallback scoring for API failures
+Batch processing for efficiency
+
+7. Quality Assurance Features
+
+Confidence scores for AI evaluations
+Manual review triggers for borderline cases
+Bias detection and mitigation
+Scoring consistency validation
+
+Deliverable: Complete AI-powered scoring engine with customer service specific evaluation criteria.
+
+PHASE 5: Results Dashboard & Candidate Analytics
+Prompt for Replit Agent:
+1. Candidate Results Dashboard (/results)
+Create comprehensive candidate performance display:
+Overall Performance Summary
+javascriptconst ResultsSummary = ({ candidateResults }) => {
+  return {
+    overallScore: "78/100", // Large, prominent display
+    recommendation: "RECOMMENDED FOR HIRE", // Green/Red/Yellow status
+    cefrLevel: "C1", // Badge format
+    careerboxFit: "82%", // Specific company alignment
+    keyStrengths: ["Excellent Communication", "Strong Problem Solving"],
+    improvementAreas: ["Reduce Speaking Hesitations", "Expand Vocabulary"]
+  };
+};
+Detailed Skill Breakdown
+
+Voice Analysis Results
+
+Fluency score with audio playback samples
+Articulation feedback with specific phonetic notes
+Tone analysis with customer service context
+Confidence level assessment
+
+
+Writing Assessment Results
+
+Grammar accuracy percentage
+Professional communication score
+Problem-solving effectiveness rating
+CEFR writing level confirmation
+
+
+Customer Service Readiness
+
+Situational Judgment Test results (6/6 scenarios)
+Empathy and soft skills evaluation
+Conflict resolution approach analysis
+Cultural sensitivity assessment
+
+
+
+Interactive Skill Radar Chart
+javascriptconst CustomerServiceRadar = ({ skillScores }) => {
+  const skills = {
+    communication: skillScores.speaking + skillScores.writing,
+    problemSolving: skillScores.sjtScore,
+    empathy: skillScores.empathyScore,
+    professionalism: skillScores.toneScore,
+    languageProficiency: skillScores.cefrScore,
+    efficiency: skillScores.typingScore
+  };
+  // Render interactive radar chart with Recharts
+};
+2. Employer/HR Dashboard (/results?view=employer)
+Create hiring manager focused interface:
+Candidate Summary Card
+
+Photo placeholder and basic info
+Overall recommendation with confidence level
+Key qualification highlights
+Red flags or concerns (if any)
+
+Comparison Features
+javascriptconst CandidateComparison = ({ candidates }) => {
+  // Side-by-side comparison of up to 3 candidates
+  // Sortable by different criteria
+  // Export functionality for hiring decisions
+};
+Interview Scheduling Integration
+
+"Schedule Interview" CTA button
+Calendar integration placeholder
+Candidate contact information
+Assessment summary for interviewers
+
+3. Advanced Analytics & Reporting
+Individual Performance Analytics
+javascriptconst PerformanceAnalytics = {
+  timeToComplete: { stage1: "8 mins", stage2: "28 mins" },
+  attemptHistory: [], // If retakes allowed
+  strengthsPattern: [], // Consistent high performance areas
+  improvementTracking: [], // Areas of growth over time
+  benchmarkComparison: "Top 15% of candidates this month"
+};
+Cohort Analytics (for bulk hiring)
+
+Group performance summaries
+Distribution charts of scores
+Success rate predictions
+Batch hiring recommendations
+
+4. Export & Share Features
+javascript// PDF Report Generation
+const generateCandidateReport = (candidateId) => {
+  // Professional PDF with:
+  // - Executive summary
+  // - Detailed scores
+  // - Audio sample links
+  // - Improvement recommendations
+  // - Hiring recommendation
+};
+
+// Shareable Links
+const createShareableResults = (candidateId, permissions) => {
+  // Generate secure, time-limited links
+  // Different views for candidate vs employer
+  // QR code for easy mobile access
+};
+
+// Integration APIs
+const integrateWithATS = (candidateData) => {
+  // Webhook endpoints for popular ATS systems
+  // Structured data export for HRIS integration
+};
+5. Results API Endpoints
+javascript// GET /api/results/candidate/:candidateId
+// Response: { fullResults, recommendations, audioSamples }
+
+// GET /api/results/employer/:candidateId/:accessToken
+// Response: { employerView, hiringRecommendation, comparisonData }
+
+// POST /api/results/generate-report
+// Body: { candidateId, format: "pdf" | "json", includeAudio: boolean }
+// Response: { reportUrl, expirationTime }
+
+// GET /api/analytics/cohort/:cohortId
+// Response: { groupStats, distributions, successPredictions }
+
+// POST /api/results/schedule-interview
+// Body: { candidateId, interviewerInfo, preferredTimes }
+// Response: { schedulingLink, confirmationStatus }
+6. Mobile-Optimized Results
+
+Responsive design for mobile viewing
+Touch-friendly audio playback controls
+Simplified view for smartphone screens
+Progressive web app features for offline access
+
+7. Real-time Notifications
+
+Email notifications when results are ready
+SMS alerts for urgent hiring decisions
+Dashboard notifications for new assessments
+Integration with Slack/Teams for HR workflows
+
+Deliverable: Complete results dashboard with employer tools and advanced analytics.
